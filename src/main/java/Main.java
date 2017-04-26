@@ -57,14 +57,15 @@ public class Main {
 
 
         //setting up a new product category
-        ProductCategory all = new ProductCategory("All", "every", "fun for everybody");
-        productCategoryDataStore.add(all);
+
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
         ProductCategory laptop = new ProductCategory("Laptop", "software", "goood");
         productCategoryDataStore.add(laptop);
         ProductCategory phone = new ProductCategory("Phone", "iphone", "can call everybody");
         productCategoryDataStore.add(phone);
+        ProductCategory all = new ProductCategory("All", "every", "fun for everybody");
+        productCategoryDataStore.add(all);
 
 
         //setting up products and printing it

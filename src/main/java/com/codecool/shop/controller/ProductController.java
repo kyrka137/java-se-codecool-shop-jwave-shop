@@ -25,6 +25,13 @@ public class ProductController {
         List<ProductCategory> categories = productCategoryDataStore.getAll();
         params.put("categories", categories);
 
+        String productCategory;
+
+        switch () {
+            case "laptop":
+
+        }
+
         params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         return new ModelAndView(params, "product/index");
     }
