@@ -29,6 +29,17 @@ public class ProductController {
 
         switch () {
             case "laptop":
+                params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+                return new ModelAndView(params, "product/index");
+                break;
+            case "laptop":
+                params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+                return new ModelAndView(params, "product/index");
+                break;
+            case "laptop":
+                params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+                return new ModelAndView(params, "product/index");
+            break;
 
         }
 
