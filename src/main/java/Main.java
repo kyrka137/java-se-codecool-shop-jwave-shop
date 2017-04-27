@@ -42,6 +42,7 @@ public class Main {
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
+        new UI();
     }
 
     public static void populateData() {
@@ -80,6 +81,7 @@ public class Main {
 
 
     }
+
 
 
 }
