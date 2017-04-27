@@ -29,14 +29,65 @@
 
 <body>
 
+
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
 
+
+
 <div class="container">
-    <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
+
+
+
+    <div class="filters">
+    <div class="dropdown" id="category-filter ">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">categories
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li th:each="category,iterStat : ${categories}">
+                <a th:text="${category.name}" th:href="'/category/' + ${category.name.toLowerCase()}"></a>
+            </li>
+        </ul>
     </div>
+
+    <div class="dropdown" id="supplier-filter ">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">suppliers
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li th:each="supplier,iterStat : ${suppliers}">
+                <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name.toLowerCase()}"></a>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Shopping Cart
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Shopping cart is empty</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div id="products" class="row list-group">
 
@@ -51,7 +102,8 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <!--<a class="btn btn-success" th:href="'/addtocart/' + ${id}">Add to cart</a>-->
+                            <button class="btn btn-success" th:onclick="'addToCart(\''+${prod.id}+'\');'">Add to cart</button>
                         </div>
                     </div>
                 </div>
@@ -62,6 +114,6 @@
 </div>
 
 <div th:replace="footer :: copy"></div>
-
+<script src="{{ url_for('public', filename='addcart.js') }}"></script>
 </body>
 </html>
