@@ -29,34 +29,16 @@
 
 <body>
 
+
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
 
+
+
 <div class="container">
-
-
-
-    <div class="filters">
-    <div class="dropdown" id="category-filter ">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">categories
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li th:each="category,iterStat : ${categories}">
-                <a th:text="${category.name}" th:href="${category.name.toLowerCase()}"></a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="dropdown" id="supplier-filter ">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">suppliers
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li th:each="supplier,iterStat : ${suppliers}">
-                <a th:text="${supplier.name}" th:href="${supplier.name.toLowerCase()}"></a>
-            </li>
-        </ul>
-    </div>
+    <div class="well well-sm">
+        <strong th:text="${category.name}">Category Title</strong>
     </div>
 
 
