@@ -43,7 +43,7 @@
             <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li th:each="category,iterStat : ${categories}">
-                <a th:text="${category.name}" th:href="${category.name.toLowerCase()}"></a>
+                <a th:text="${category.name}" th:href="'/category/' + ${category.name.toLowerCase()}"></a>
             </li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
             <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li th:each="supplier,iterStat : ${suppliers}">
-                <a th:text="${supplier.name}" th:href="${supplier.name.toLowerCase()}"></a>
+                <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name.toLowerCase()}"></a>
             </li>
         </ul>
     </div>

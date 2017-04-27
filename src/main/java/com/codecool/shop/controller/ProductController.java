@@ -36,24 +36,18 @@ public class ProductController {
         params.put("suppliers", suppliers);
 
         String selectedSupplierName = req.params(":supplierName");
-        if (selectedSupplierName == null) {
-            params.put("products", productDataStore.getAll());
-        } else {
+        String selectedCategoryName = req.params(":categoryName");
+
+        if (selectedSupplierName != null) {
             Supplier selectedSupplier = supplierCategoryStore.find(selectedSupplierName);
             params.put("products", productDataStore.getBy(selectedSupplier));
-        }
-
-
-        //return new ModelAndView(params, "product/index");
-
-
-        String selectedCategoryName = req.params(":categoryName");
-        if (selectedCategoryName == null) {
-            params.put("products", productDataStore.getAll());
-        } else {
+        } else if (selectedCategoryName != null){
             ProductCategory selectedCategory = productCategoryDataStore.find(selectedCategoryName);
             params.put("products", productDataStore.getBy(selectedCategory));
+        } else {
+            params.put("products", productDataStore.getAll());
         }
+
         return new ModelAndView(params, "product/index");
     }
 }
