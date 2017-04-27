@@ -27,15 +27,15 @@ public class Main {
         // populate some data for the memory storage
         populateData();
 
-        // Always start with more specific routes
-        get("/hello", (req, res) -> "Hello World");
-
         // Always add generic routes to the end
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
         // Equivalent with above
         get("/index", (Request req, Response res) -> {
            return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
         });
+        get("/:categoryName", ProductController::renderProducts, new ThymeleafTemplateEngine());
+
+        get("/:supplierName", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
@@ -58,13 +58,13 @@ public class Main {
 
         //setting up a new product category
 
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        ProductCategory tablet = new ProductCategory("tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
-        ProductCategory laptop = new ProductCategory("Laptop", "software", "goood");
+        ProductCategory laptop = new ProductCategory("laptop", "software", "goood");
         productCategoryDataStore.add(laptop);
-        ProductCategory phone = new ProductCategory("Phone", "iphone", "can call everybody");
+        ProductCategory phone = new ProductCategory("phone", "iphone", "can call everybody");
         productCategoryDataStore.add(phone);
-        ProductCategory all = new ProductCategory("All", "every", "fun for everybody");
+        ProductCategory all = new ProductCategory("all", "every", "fun for everybody");
         productCategoryDataStore.add(all);
 
 
