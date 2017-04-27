@@ -33,6 +33,7 @@ public class Main {
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
+        new UI();
     }
 
     public static void populateData() {
@@ -57,6 +58,7 @@ public class Main {
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
 
     }
+
 
 
 }
