@@ -102,7 +102,8 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <!--<a class="btn btn-success" th:href="'/addtocart/' + ${id}">Add to cart</a>-->
+                            <button class="btn btn-success" th:onclick="'addToCart(\''+${prod.id}+'\');'">Add to cart</button>
                         </div>
                     </div>
                 </div>
@@ -113,6 +114,6 @@
 </div>
 
 <div th:replace="footer :: copy"></div>
-
+<script src="{{ url_for('public', filename='addcart.js') }}"></script>
 </body>
 </html>

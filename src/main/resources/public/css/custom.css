@@ -60,3 +60,12 @@
 {
     margin: 0 0 11px;
 }
+
+.filters
+{
+    display: inline-block;
+}
+
+#supplier-filter {
+    display: inline-block;
+}
