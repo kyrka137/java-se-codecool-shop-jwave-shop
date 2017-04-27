@@ -33,9 +33,15 @@ public class Main {
         get("/index", (Request req, Response res) -> {
            return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
         });
-        get("/:categoryName", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/:categoryName", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
+        });
+        //get("/:categoryName", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/:supplierName", (Request req, Response res) -> {
+                    return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
+                });
 
-        get("/:supplierName", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        //get("/:supplierName", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
@@ -48,7 +54,7 @@ public class Main {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        Supplier amazon = new Supplier("amazon", "Digital content and services");
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);

@@ -34,17 +34,7 @@
 </div>
 
 <div class="container">
-    <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
-    <div class="form-group row">
-        <li class="form-control" id="status" name="status">
-            <option th:each="cat, iterStat : ${categories}">
-                    <a th:text="${cat.name}"
-                       th:href="${category.name.toLowerCase()}"></a></option>
-        </li>
 
-    </div>
 
 
     <div class="filters">
@@ -58,12 +48,12 @@
         </ul>
     </div>
 
-    <div class="dropdown" id="category-filter ">
+    <div class="dropdown" id="supplier-filter ">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">suppliers
             <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li th:each="category,iterStat : ${categories}">
-                <a th:text="${category.name}" th:href="${category.name.toLowerCase()}"></a>
+            <li th:each="supplier,iterStat : ${suppliers}">
+                <a th:text="${supplier.name}" th:href="${supplier.name.toLowerCase()}"></a>
             </li>
         </ul>
     </div>
