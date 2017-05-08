@@ -6,7 +6,9 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.ShopCart;
 import com.codecool.shop.model.Supplier;
 import spark.ModelAndView;
 import spark.Request;
@@ -22,10 +24,15 @@ public class ProductController {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierCategoryStore = SupplierDaoMem.getInstance();
+        ShopCart cart = ShopCart.getInstance();
+        List<Product> cartProducts = cart.getAllCarts();
+
 
 
         Map params = new HashMap<>();
         params.put("category", productCategoryDataStore.find(1));
+
+        params.put("cart", cartProducts);
 
         List<ProductCategory> categories = productCategoryDataStore.getAll();
         params.put("categories", categories);
@@ -50,6 +57,25 @@ public class ProductController {
         }
 
         return new ModelAndView(params, "product/index");
+    }
+
+
+    public static ModelAndView renderShoppingCarts(Request req, Response res) {
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        String id = req.params(":id");
+        Product newProduct = productDataStore.find(Integer.parseInt(id));
+
+        ShopCart cart = ShopCart.getInstance();
+        for (Product carti : cart.getAllCarts()) {
+            if (carti.getId() == Integer.parseInt(id))
+                return ProductController.renderProducts(req, res);
+        }
+
+        cart.addShoppingCart(newProduct);
+        return ProductController.renderProducts(req, res);
+
+
+
     }
 }
 
