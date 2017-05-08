@@ -15,5 +15,16 @@ $(document).ready(function() {
         console.log(titleList);
 
         console.log(title);
+
+        var modal_content = $(".modal-content").j;
+        $.ajax({
+            method: "POST",
+            url: "/index/cart",
+            data: { modal_content: modal_content}
+        })
+            .done(function( msg ) {
+                alert( "Data Saved: " + msg );
+            });
+
     });
 });
