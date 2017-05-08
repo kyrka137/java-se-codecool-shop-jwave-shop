@@ -23,6 +23,7 @@ public class ProductController {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierCategoryStore = SupplierDaoMem.getInstance();
 
+
         Map params = new HashMap<>();
         params.put("category", productCategoryDataStore.find(1));
 
@@ -41,7 +42,7 @@ public class ProductController {
         if (selectedSupplierName != null) {
             Supplier selectedSupplier = supplierCategoryStore.find(selectedSupplierName);
             params.put("products", productDataStore.getBy(selectedSupplier));
-        } else if (selectedCategoryName != null){
+        } else if (selectedCategoryName != null) {
             ProductCategory selectedCategory = productCategoryDataStore.find(selectedCategoryName);
             params.put("products", productDataStore.getBy(selectedCategory));
         } else {
@@ -51,6 +52,21 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 }
+
+/*
+    public static ModelAndView renderShopCart(Request req, Response res) {
+        Map params = new HashMap<>();
+        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        params.put("cart", shoppingCartDataStore.getAll());
+        params.put("TotalPrice", shoppingCartDataStore.getTotal());
+        return new ModelAndView(params, "product/cart");
+    }
+
+
+    }
+*/
+
+
 
 
 
