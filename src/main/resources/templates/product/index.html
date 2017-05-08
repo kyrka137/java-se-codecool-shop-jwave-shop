@@ -77,8 +77,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Shopping cart is empty</p>
+                <div class="modal-body" th:each="prod : ${cart}">
+                    <p th:text="${prod.getName()}">Shopping cart is empty</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <!--<a class="btn btn-success" th:href="'/addtocart/' + ${id}">Add to cart</a>-->
-                            <button class="btn btn-success">Add to cart</button>
+                            <a class="btn btn-success" th:attr="href='/addtocart/' + ${prod.getId()}">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -114,6 +114,6 @@
 </div>
 
 <div th:replace="footer :: copy"></div>
-<script src="js/addcart.js"></script>
+<script src="/js/addcart.js"></script>
 </body>
 </html>
