@@ -40,9 +40,9 @@ public class Main {
         get("/supplier/:supplierName", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
         });
-        //get("/addtocart/:id", (Request req, Response res) -> {
-                    //return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
-                //});
+        get("/addtocart/:id", (Request req, Response res) -> {
+                    return new ThymeleafTemplateEngine().render(ProductController.renderShoppingCarts(req, res));
+                });
         //get("/cart", ProductController::renderShopCart, new ThymeleafTemplateEngine());
 
 
