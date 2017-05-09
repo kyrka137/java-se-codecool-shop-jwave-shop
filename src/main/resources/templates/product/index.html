@@ -23,11 +23,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <!--font awesome icon import-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-
-    <link  href="resources/public/css/custom.css" rel="stylesheet" type="text/css" />
-
-
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 </head>
 
 <body>
@@ -37,38 +36,36 @@
     <h1>Codecool Shop</h1>
 </div>
 
+<nav>
+    <div class="dropdown">
+        <div class="dropbtn">Categories<span class="caret"></span></div>
+        <div class="dropdown-content">
+            <div><a href="/">All</a></div>
+            <div th:each="category,iterStat : ${categories}">
+                <a th:text="${category.name}" th:href="'/category/' + ${category.name.toLowerCase()}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown">
+        <div class="dropbtn">Suppliers<span class="caret"></span></div>
+        <div class="dropdown-content">
+            <div><a href="/">All</a></div>
+            <div th:each="supplier,iterStat : ${suppliers}">
+                <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name.toLowerCase()}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="cart-btn" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <span>Shopping Cart </span>
+    </div>
+</nav>
+
 
 
 <div class="container">
 
 
-
-    <div class="filters">
-    <div class="dropdown" id="category-filter ">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">categories
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li th:each="category,iterStat : ${categories}">
-                <a th:text="${category.name}" th:href="'/category/' + ${category.name.toLowerCase()}"></a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="dropdown" id="supplier-filter ">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">suppliers
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li th:each="supplier,iterStat : ${suppliers}">
-                <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name.toLowerCase()}"></a>
-            </li>
-        </ul>
-    </div>
-    </div>
-
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Shopping Cart
-    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,8 +77,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Shopping cart is empty</p>
+                <div class="modal-body" th:each="prod : ${cart}">
+                    <p th:text="${prod.getName()}">Shopping cart is empty</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -106,7 +103,7 @@
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <!--<a class="btn btn-success" th:href="'/addtocart/' + ${id}">Add to cart</a>-->
-                            <button class="btn btn-success">Add to cart</button>
+                            <a class="btn btn-success" th:attr="href='/addtocart/' + ${prod.getId()}">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -117,6 +114,6 @@
 </div>
 
 <div th:replace="footer :: copy"></div>
-<script src="/js/addcart.js"></script>
+<script th:src="@{~/js/java.js}"></script>
 </body>
 </html>
