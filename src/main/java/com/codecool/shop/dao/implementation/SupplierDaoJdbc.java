@@ -1,8 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.model.ProductCategory;
-
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Supplier;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,32 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gabor on 2017.05.08..
+ * Created by flavia on 2017.05.10..
  */
-public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCategoryDao {
+public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
+
     @Override
-    public void add(ProductCategory category) {
+    public void add(Supplier supplier) {
         String query =
-                "INSERT INTO categories (id, name, department, description) " +
-                "VALUES ('" + category.getId() + "', '" + category.getName() + "', '" + category.getDepartment() + "', '" + category.getDescription() + "')" +
-                "ON CONFLICT (name) DO UPDATE " +
-                "SET id = '" + category.getId() + "', name = '" + category.getName() + "', department = '" + category.getDepartment() + "', description = '" + category.getDescription() + "';";
+                "INSERT INTO suppliers (id, name, description) " +
+                        "VALUES ('" + supplier.getId() + "', '" + supplier.getName() + "', '" + supplier.getDescription() + "')" +
+                        "ON CONFLICT (name) DO UPDATE " +
+                        "SET id = '" + supplier.getId() + "', name = '" + supplier.getName() + "', description = '" + supplier.getDescription() + "';";
         executeQuery(query);
     }
 
     @Override
-    public ProductCategory find(int id) {
-        String query = "SELECT * FROM categories WHERE id ='" + id + "';";
+    public Supplier find(int id) {
+        String query = "SELECT * FROM suppliers WHERE id ='" + id + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ){
             if (resultSet.next()){
-                ProductCategory result = new ProductCategory(
+                Supplier result = new Supplier(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
                         resultSet.getString("description"));
                 return result;
             } else {
@@ -51,18 +50,17 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
     }
 
     @Override
-    public ProductCategory find(String name) {
-        String query = "SELECT * FROM categories WHERE id ='" + name + "';";
+    public Supplier find(String name) {
+        String query = "SELECT * FROM suppliers WHERE id ='" + name + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ){
             if (resultSet.next()){
-                ProductCategory result = new ProductCategory(
+                Supplier result = new Supplier(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
                         resultSet.getString("description"));
                 return result;
             } else {
@@ -78,27 +76,26 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
 
     @Override
     public void remove(int id) {
-        String query = "DELETE FROM categories WHERE id = '" + id +"';";
+        String query = "DELETE FROM suppliers WHERE id = '" + id +"';";
         executeQuery(query);
     }
 
     @Override
-    public List<ProductCategory> getAll() {
-        String query = "SELECT * FROM categories;";
+    public List<Supplier> getAll() {
+        String query = "SELECT * FROM suppliers;";
 
-        List<ProductCategory> resultList = new ArrayList<>();
+        List<Supplier> resultList = new ArrayList<>();
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ){
             while (resultSet.next()){
-                ProductCategory actProductCategory = new ProductCategory(
+                Supplier actSupplier = new Supplier(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
                         resultSet.getString("description"));
-                resultList.add(actProductCategory);
+                resultList.add(actSupplier);
             }
 
 
