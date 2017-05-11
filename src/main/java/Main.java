@@ -7,9 +7,13 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.UI;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -64,6 +68,29 @@ public class Main {
                     return new ThymeleafTemplateEngine().render(ProductController.renderShoppingCarts(req, res));
                 });
         //get("/cart", ProductController::renderShopCart, new ThymeleafTemplateEngine());
+
+
+//        checkout stuff
+        get("/checkout", (Request req, Response res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ThymeleafTemplateEngine().render(new ModelAndView(model, "product/checkout"));
+        });
+
+        post("/checkout", (Request request,Response response) -> {
+            String username,email,billingAddr, shippingAdrr;
+            String phoneNum;
+            username = request.queryParams("username");
+            email = request.queryParams("email");
+            phoneNum = request.queryParams("phoneNum");
+            billingAddr = request.queryParams("billingAddr");
+            shippingAdrr = request.queryParams("shippingAddr");
+
+//            System.out.println(username);
+            response.redirect("/index");
+            return "process";
+        });
+        //checkout stuff end
+
 
 
 
