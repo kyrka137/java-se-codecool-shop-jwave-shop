@@ -16,7 +16,7 @@ public class LineItem {
     }
 
 
-    public int getId(){
+    public int getId() {
         return this.product.getId();
     }
 
