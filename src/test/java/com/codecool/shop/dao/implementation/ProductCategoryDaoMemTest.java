@@ -5,6 +5,15 @@ import com.codecool.shop.model.ProductCategory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
+
+
+
+
+
+
+
+
 class ProductCategoryDaoMemTest {
     ProductCategoryDaoMemTest() {
     }
