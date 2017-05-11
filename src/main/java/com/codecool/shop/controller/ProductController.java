@@ -49,9 +49,7 @@ public class ProductController {
         String selectedCategoryName = req.params(":categoryName");
 
         if (selectedSupplierName != null) {
-            System.out.println(selectedSupplierName);
             Supplier selectedSupplier = supplierDataStore.find(selectedSupplierName);
-            System.out.println(selectedSupplier);
             params.put("products", productDataStore.getBy(selectedSupplier));
         } else if (selectedCategoryName != null) {
             ProductCategory selectedCategory = productCategoryDataStore.find(selectedCategoryName);
