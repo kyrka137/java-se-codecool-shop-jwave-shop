@@ -1,4 +1,5 @@
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.dao.implementation.JdbcConnection;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.SupplierDaoJdbc;
@@ -21,6 +22,28 @@ public class Main {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
+
+        JdbcConnection connection = new JdbcConnection();
+        connection.executeQuery("DROP TABLE IF EXISTS products; " +
+                "DROP TABLE IF EXISTS suppliers; " +
+                "DROP TABLE IF EXISTS categories; " +
+                "CREATE TABLE suppliers " +
+                "(supplier_id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "description varchar);" +
+                "CREATE TABLE categories " +
+                "(category_id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "department varchar, " +
+                "description varchar);" +
+                "CREATE TABLE products " +
+                "(id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "defaultPrice float, " +
+                "currencyString varchar, " +
+                "description varchar, " +
+                "cat_id INTEGER REFERENCES categories(category_id), " +
+                "sup_id INTEGER REFERENCES suppliers(supplier_id));");
 
         // populate some data for the memory storage
         populateData();
