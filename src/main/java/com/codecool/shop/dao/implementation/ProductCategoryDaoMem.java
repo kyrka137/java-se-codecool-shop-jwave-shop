@@ -1,3 +1,4 @@
+
 package com.codecool.shop.dao.implementation;
 
 
@@ -53,15 +54,14 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
         return temp;
     }
 
-
-
-    public boolean remove(int id) {
-        if(find(id )!=null) {
-            DATA.remove(find(id));
-            return true;
-        }
-        return false;
+    public void remove(int id) {
+        DATA.remove(find(id));
     }
+
+
+
+
+
 
     @Override
     public List<ProductCategory> getAll() {
