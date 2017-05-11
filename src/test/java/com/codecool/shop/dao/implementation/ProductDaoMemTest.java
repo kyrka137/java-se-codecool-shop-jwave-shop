@@ -49,10 +49,32 @@ class ProductDaoMemTest {
     }
 
     @Test
+    void getAll() {
+        ProductDao productDao = ProductDaoMem.getInstance();
+        assertEquals(1,productDao.getAll().size());
+    }
+
+    @Test
     void testAdd() {
         ProductDao productDao = ProductDaoMem.getInstance();
         assertEquals(1,productDao.getAll().size());
         productDao.remove(1);
     }
+
+    @Test
+    void testFind() {
+        ProductDao productDao = ProductDaoMem.getInstance();
+        assertEquals("Amazon Fire",productDao.find(1).getName());
+
+    }
+
+    @Test
+    void testRemove() {
+        ProductDao productDao = ProductDaoMem.getInstance();
+        productDao.remove(1);
+        assertEquals(0,productDao.getAll().size());
+    }
+
+
 
 }
