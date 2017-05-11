@@ -27,9 +27,11 @@ public class ProductDaoJdbc extends JdbcConnection implements ProductDao {
 
     @Override
     public Product find(int id) {
-        String query = "SELECT * FROM products WHERE id ='" + id + "'" +
-                "INNER JOIN suppliers ON products.sup_id = suppliers.supplier_id" +
-                "INNER JOIN categories ON products.cat_id = categories.category_id;";
+        String query = "SELECT * FROM products " +
+                "INNER JOIN suppliers ON products.sup_id = suppliers.supplier_id " +
+                "INNER JOIN categories ON products.cat_id = categories.category_id "+
+                "WHERE id =" + id + ";";
+
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
@@ -114,11 +116,75 @@ public class ProductDaoJdbc extends JdbcConnection implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+
+        String query = "SELECT * FROM products WHERE sup_id = '" + supplier.getId() + "';";
+
+        List<Product> resultList = new ArrayList<>();
+        ProductCategoryDaoJdbc productCategoryDataStore = new ProductCategoryDaoJdbc();
+        SupplierDaoJdbc supplierDataStore = new SupplierDaoJdbc();
+
+        try (Connection connection = getConnection();
+             Statement statement =connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ){
+            while (resultSet.next()){
+//                int prodCatId = resultSet.getInt("cat_id");
+//                ProductCategory productCategory = productCategoryDaoJdbc.find(prodCatId);
+//                int supId = resultSet.getInt("sup_id");
+//                Supplier sup = supplierDaoJdbc.find(supplier.getId());
+                Product actProduct = new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getFloat("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        productCategoryDataStore.find(resultSet.getInt("cat_id")),
+                        supplierDataStore.find(resultSet.getInt("sup_id"))
+                );
+                resultList.add(actProduct);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+        String query = "SELECT * FROM products WHERE cat_id = '" + productCategory.getId() + "';";
+
+        List<Product> resultList = new ArrayList<>();
+        ProductCategoryDaoJdbc productCategoryDataStore = new ProductCategoryDaoJdbc();
+        SupplierDaoJdbc supplierDataStore = new SupplierDaoJdbc();
+
+        try (Connection connection = getConnection();
+             Statement statement =connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ){
+            while (resultSet.next()){
+//                int prodCatId = resultSet.getInt("cat_id");
+//                ProductCategory productCategory = productCategoryDaoJdbc.find(prodCatId);
+//                int supId = resultSet.getInt("sup_id");
+//                Supplier supplier = supplierDaoJdbc.find(supId);
+                Product actProduct = new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getFloat("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        productCategoryDataStore.find(resultSet.getInt("cat_id")),
+                        supplierDataStore.find(resultSet.getInt("sup_id"))
+                );
+                resultList.add(actProduct);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
     }
 }

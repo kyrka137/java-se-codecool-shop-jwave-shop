@@ -10,15 +10,26 @@ public class ShopCart {
 
     private Integer id;
     private String status;
-    private List<Product> shoppingCart;
+    private List<LineItem> shoppingCart;
     private static ShopCart instance;
+    float totalPrice = 0;
 
 
     public void addShoppingCart(Product product) {
-        shoppingCart.add(product);
+        boolean notFound = true;
+        for(LineItem lineItem  : shoppingCart) {
+            if(lineItem.getProduct().getId() == product.getId()) {
+                lineItem.setQuantity(lineItem.getQuantity()+1);
+                notFound = false;
+            }
+        }
+        if (notFound) {
+            LineItem lineItem = new LineItem(product, 1);
+            shoppingCart.add(lineItem);
+        }
     }
 
-    public Product getShoppingCart(int id) {
+    public LineItem getShoppingCart(int id) {
         return shoppingCart.get(id);
     }
 
@@ -29,13 +40,20 @@ public class ShopCart {
         return instance;
     }
 
-    public List<Product> getAllCarts() {
+    public List<LineItem> getAllCarts() {
         return shoppingCart;
     }
 
     public ShopCart() {
         shoppingCart = new ArrayList<>();
 
+    }
+
+    public float getTotalPrice() {
+        for (LineItem lineItem: shoppingCart) {
+            this.totalPrice += lineItem.getPrice();
+        }
+        return totalPrice;
     }
 
     public int getid() {
