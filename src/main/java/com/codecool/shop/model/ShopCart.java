@@ -12,6 +12,7 @@ public class ShopCart {
     private String status;
     private List<LineItem> shoppingCart;
     private static ShopCart instance;
+    float totalPrice = 0;
 
 
     public void addShoppingCart(Product product) {
@@ -46,6 +47,13 @@ public class ShopCart {
     public ShopCart() {
         shoppingCart = new ArrayList<>();
 
+    }
+
+    public float getTotalPrice() {
+        for (LineItem lineItem: shoppingCart) {
+            this.totalPrice += lineItem.getPrice();
+        }
+        return totalPrice;
     }
 
     public int getid() {
