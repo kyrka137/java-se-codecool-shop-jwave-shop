@@ -1,11 +1,10 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoJdbc;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.ShopCart;
@@ -21,9 +20,12 @@ import java.util.Map;
 public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierCategoryStore = SupplierDaoMem.getInstance();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierCategoryStore = SupplierDaoMem.getInstance();
+        ProductDaoJdbc productDataStore = new ProductDaoJdbc();
+        ProductCategoryDaoJdbc productCategoryDataStore = new ProductCategoryDaoJdbc();
+        SupplierDaoJdbc supplierDataStore = new SupplierDaoJdbc();
         ShopCart cart = ShopCart.getInstance();
         List<Product> cartProducts = cart.getAllCarts();
 
@@ -38,16 +40,18 @@ public class ProductController {
         params.put("categories", categories);
 
 
-        params.put("supplier", supplierCategoryStore.find(1));
+        params.put("supplier", supplierDataStore.find(1));
 
-        List<Supplier> suppliers = supplierCategoryStore.getAll();
+        List<Supplier> suppliers = supplierDataStore.getAll();
         params.put("suppliers", suppliers);
 
         String selectedSupplierName = req.params(":supplierName");
         String selectedCategoryName = req.params(":categoryName");
 
         if (selectedSupplierName != null) {
-            Supplier selectedSupplier = supplierCategoryStore.find(selectedSupplierName);
+            System.out.println(selectedSupplierName);
+            Supplier selectedSupplier = supplierDataStore.find(selectedSupplierName);
+            System.out.println(selectedSupplier);
             params.put("products", productDataStore.getBy(selectedSupplier));
         } else if (selectedCategoryName != null) {
             ProductCategory selectedCategory = productCategoryDataStore.find(selectedCategoryName);

@@ -51,7 +51,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
 
     @Override
     public Supplier find(String name) {
-        String query = "SELECT * FROM suppliers WHERE supplier_id ='" + name + "';";
+        String query = "SELECT * FROM suppliers WHERE LOWER(name) ='" + name + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();

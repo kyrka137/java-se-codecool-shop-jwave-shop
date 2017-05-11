@@ -52,7 +52,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
 
     @Override
     public ProductCategory find(String name) {
-        String query = "SELECT * FROM categories WHERE category_id ='" + name + "';";
+        String query = "SELECT * FROM categories WHERE name ='" + name + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
