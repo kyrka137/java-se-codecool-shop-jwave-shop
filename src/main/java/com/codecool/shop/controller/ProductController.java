@@ -1,14 +1,8 @@
 package com.codecool.shop.controller;
-
-import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoJdbc;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.ShopCart;
-import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -27,7 +21,7 @@ public class ProductController {
         ProductCategoryDaoJdbc productCategoryDataStore = new ProductCategoryDaoJdbc();
         SupplierDaoJdbc supplierDataStore = new SupplierDaoJdbc();
         ShopCart cart = ShopCart.getInstance();
-        List<Product> cartProducts = cart.getAllCarts();
+        List<LineItem> cartProducts = cart.getAllCarts();
 
 
 
@@ -63,17 +57,19 @@ public class ProductController {
 
 
     public static ModelAndView renderShoppingCarts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDaoJdbc productDataStore = new ProductDaoJdbc();
         String id = req.params(":id");
         Product newProduct = productDataStore.find(Integer.parseInt(id));
+        String price = newProduct.getPrice();
+        LineItem newLineItem = new LineItem(newProduct, 1, price);
 
         ShopCart cart = ShopCart.getInstance();
-        for (Product carti : cart.getAllCarts()) {
+        for (LineItem carti : cart.getAllCarts()) {
             if (carti.getId() == Integer.parseInt(id))
                 return ProductController.renderProducts(req, res);
         }
 
-        cart.addShoppingCart(newProduct);
+        cart.addShoppingCart(newLineItem);
         return ProductController.renderProducts(req, res);
 
 

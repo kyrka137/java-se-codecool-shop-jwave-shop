@@ -10,15 +10,15 @@ public class ShopCart {
 
     private Integer id;
     private String status;
-    private List<Product> shoppingCart;
+    private List<LineItem> shoppingCart;
     private static ShopCart instance;
 
 
-    public void addShoppingCart(Product product) {
-        shoppingCart.add(product);
+    public void addShoppingCart(LineItem lineItem) {
+        shoppingCart.add(lineItem);
     }
 
-    public Product getShoppingCart(int id) {
+    public LineItem getShoppingCart(int id) {
         return shoppingCart.get(id);
     }
 
@@ -29,7 +29,7 @@ public class ShopCart {
         return instance;
     }
 
-    public List<Product> getAllCarts() {
+    public List<LineItem> getAllCarts() {
         return shoppingCart;
     }
 

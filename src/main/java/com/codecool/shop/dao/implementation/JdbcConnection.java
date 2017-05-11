@@ -11,8 +11,8 @@ import java.sql.Statement;
 public class JdbcConnection {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
+    private static final String DB_USER = "gabor";
+    private static final String DB_PASSWORD = "gabor";
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
