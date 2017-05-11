@@ -20,31 +20,38 @@
 // });
 
 $(document).ready(function() {
-    var counter = 0;
-    $(".qty").on("click", function () {
-        // var $qty=$(this).closest('button').find('.qty');
-        //var currentVal = parseInt($(this).val());
-        counter++;
+    $(".value").on("click", function(){
+        var counter = $(this).closest(".modal-body").find(".quantity").val();
+        var operator = this.getAttribute("data-product_id");
+        if(operator==="add"){counter++;}
+        if(operator==="remove"){counter--;}
         $(this).closest(".modal-body").find(".quantity").val(counter);
-
-        // var total = 0;
-        // $(".qty").each(function() {
-        //     total += parseInt($(".qty").val());
-        // });
-        // $(".sum").val(total);
-        // });
-
-
     });
 
-    $(".decrease").on("click", function () {
-        // var $qty=$(this).closest('button').find('.qty');
-        //var currentVal = parseInt($(this).val());
-        counter--;
-        $(this).closest(".modal-body").find(".quantity").val(counter);
-        // $( "decrease" ).each(function() {
-        //     parseInt()
-    });
+    // $(".qty").on("click", function () {
+    //     // var $qty=$(this).closest('button').find('.qty');
+    //     //var currentVal = parseInt($(this).val());
+    //     counter++;
+    //     $(this).closest(".modal-body").find(".quantity").val(counter);
+    //
+    //     // var total = 0;
+    //     // $(".qty").each(function() {
+    //     //     total += parseInt($(".qty").val());
+    //     // });
+    //     // $(".sum").val(total);
+    //     // });
+    //
+    //
+    // });
+    //
+    // $(".decrease").on("click", function () {
+    //     // var $qty=$(this).closest('button').find('.qty');
+    //     //var currentVal = parseInt($(this).val());
+    //     counter--;
+    //     $(this).closest(".modal-body").find(".quantity").val(counter);
+    //     // $( "decrease" ).each(function() {
+    //     //     parseInt()
+    // });
 });
 
 
