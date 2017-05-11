@@ -77,14 +77,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" th:each="prod : ${cart}">
-                    <spam th:text="${prod.getName()}" >Shopping cart is empty</spam>
-                    <spam th:text="${prod.getPrice()}" >Shopping cart is empty</spam>
+                <div class="modal-body" th:each="lineItem : ${cart}">
+                    <span th:text="${lineItem.getName()}" >Shopping cart is empty</span>
+                    <span th:text="${lineItem.getPrice()}" >Shopping cart is empty</span>
 
                     <button type="text"  data-product_id="1" class="qty"> + </button>
                     <button type="text"  data-product_id="1" class="decrease"> - </button>
 
-                    <input class="quantity"  type="text" value="1"/>
+                    <input class="quantity"  type="text"  th:value="${lineItem.getQuantity()}" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

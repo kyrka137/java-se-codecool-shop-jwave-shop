@@ -6,18 +6,18 @@ package com.codecool.shop.model;
 public class LineItem {
     private Product product;
     private int quantity;
-    private String price;
 
-
-    public LineItem(Product product, int quantity, String price) {
+    public LineItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.price = price;
     }
 
+    public Product getProduct() {
+        return product;
+    }
 
-    public int getId() {
-        return this.product.getId();
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -28,18 +28,13 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public String  getPrice() {
-        return price;
+    public float getPrice() {
+        return quantity*product.getDefaultPrice();
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public String getName() {
+        return product.getName();
     }
 
-
-
-    public String getName(){
-        return this.product.getName();
-    }
 }
 

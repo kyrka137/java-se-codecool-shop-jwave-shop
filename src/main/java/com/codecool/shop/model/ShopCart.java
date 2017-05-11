@@ -14,8 +14,18 @@ public class ShopCart {
     private static ShopCart instance;
 
 
-    public void addShoppingCart(LineItem lineItem) {
-        shoppingCart.add(lineItem);
+    public void addShoppingCart(Product product) {
+        boolean notFound = true;
+        for(LineItem lineItem  : shoppingCart) {
+            if(lineItem.getProduct().getId() == product.getId()) {
+                lineItem.setQuantity(lineItem.getQuantity()+1);
+                notFound = false;
+            }
+        }
+        if (notFound) {
+            LineItem lineItem = new LineItem(product, 1);
+            shoppingCart.add(lineItem);
+        }
     }
 
     public LineItem getShoppingCart(int id) {

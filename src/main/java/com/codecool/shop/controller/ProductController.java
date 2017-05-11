@@ -60,16 +60,16 @@ public class ProductController {
         ProductDaoJdbc productDataStore = new ProductDaoJdbc();
         String id = req.params(":id");
         Product newProduct = productDataStore.find(Integer.parseInt(id));
-        String price = newProduct.getPrice();
-        LineItem newLineItem = new LineItem(newProduct, 1, price);
+        //String price = newProduct.getPrice();
+        //LineItem newLineItem = new LineItem(newProduct, 1, price);
 
         ShopCart cart = ShopCart.getInstance();
-        for (LineItem carti : cart.getAllCarts()) {
-            if (carti.getId() == Integer.parseInt(id))
-                return ProductController.renderProducts(req, res);
-        }
+//        for (LineItem carti : cart.getAllCarts()) {
+//            if (carti.getProductId() == Integer.parseInt(id))
+//                return ProductController.renderProducts(req, res);
+//        }
 
-        cart.addShoppingCart(newLineItem);
+        cart.addShoppingCart(newProduct);
         return ProductController.renderProducts(req, res);
 
 
