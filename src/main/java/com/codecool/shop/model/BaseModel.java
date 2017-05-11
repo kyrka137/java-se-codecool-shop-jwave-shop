@@ -9,11 +9,14 @@ public class BaseModel {
     protected String name;
     protected String description;
 
+    public BaseModel(int id) { this.id = id ;}
+
     public BaseModel(String name) {
         this.name = name;
     }
 
-    public BaseModel(String name, String description) {
+    public BaseModel(int id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }

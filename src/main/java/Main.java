@@ -1,10 +1,8 @@
 import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.JdbcConnection;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
+import com.codecool.shop.dao.implementation.SupplierDaoJdbc;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -24,6 +22,28 @@ public class Main {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
+
+        JdbcConnection connection = new JdbcConnection();
+        connection.executeQuery("DROP TABLE IF EXISTS products; " +
+                "DROP TABLE IF EXISTS suppliers; " +
+                "DROP TABLE IF EXISTS categories; " +
+                "CREATE TABLE suppliers " +
+                "(supplier_id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "description varchar);" +
+                "CREATE TABLE categories " +
+                "(category_id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "department varchar, " +
+                "description varchar);" +
+                "CREATE TABLE products " +
+                "(id int PRIMARY KEY, " +
+                "name varchar UNIQUE, " +
+                "defaultPrice float, " +
+                "currencyString varchar, " +
+                "description varchar, " +
+                "cat_id INTEGER REFERENCES categories(category_id), " +
+                "sup_id INTEGER REFERENCES suppliers(supplier_id));");
 
         // populate some data for the memory storage
         populateData();
@@ -54,37 +74,40 @@ public class Main {
 
     public static void populateData() {
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductDaoJdbc productDataStore = new ProductDaoJdbc();
+        ProductCategoryDaoJdbc productCategoryDataStore = new ProductCategoryDaoJdbc();
+        SupplierDaoJdbc supplierDataStore = new SupplierDaoJdbc();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        Supplier amazon = new Supplier(1, "Amazon", "Digital content and services");
         supplierDataStore.add(amazon);
-        Supplier lenovo = new Supplier("Lenovo", "Tablets");
+        Supplier lenovo = new Supplier(2, "Lenovo", "Tablets");
         supplierDataStore.add(lenovo);
-        Supplier samsung = new Supplier("Samsung", "Computers");
+        Supplier samsung = new Supplier(3, "Samsung", "Computers");
         supplierDataStore.add(samsung);
-        Supplier sony = new Supplier("Sony", "Phones");
+        Supplier sony = new Supplier(4, "Sony", "Phones");
         supplierDataStore.add(sony);
 
 
         //setting up a new product category
 
-        ProductCategory tablet = new ProductCategory("tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        ProductCategory tablet = new ProductCategory(1, "tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
-        ProductCategory laptop = new ProductCategory("laptop", "software", "goood");
+        ProductCategory laptop = new ProductCategory(2, "laptop", "software", "goood");
         productCategoryDataStore.add(laptop);
-        ProductCategory phone = new ProductCategory("phone", "phone", "can call everybody");
+        ProductCategory phone = new ProductCategory(3, "phone", "phone", "can call everybody");
         productCategoryDataStore.add(phone);
 
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo", 70, "USD", "Light and fast.", laptop, amazon));
-        productDataStore.add(new Product("Sony Xperia Z3 D6653 White", 110, "USD", "Sony's one of favourite product.", phone, samsung));
+        productDataStore.add(new Product(1, "Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+        productDataStore.add(new Product(2, "Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
+        productDataStore.add(new Product(3, "Amazon Fire HD 8", 89, "USD", "Amazons latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product(4, "Lenovo", 70, "USD", "Light and fast.", laptop, lenovo));
+        productDataStore.add(new Product(5, "Sony Xperia Z3 D6653 White", 110, "USD", "Sonys one of favourite product.", phone, sony));
 
 
     }

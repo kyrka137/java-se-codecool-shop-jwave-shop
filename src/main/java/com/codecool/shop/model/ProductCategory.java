@@ -6,8 +6,8 @@ public class ProductCategory extends BaseModel {
     private String department;
     private ArrayList<Product> products;
 
-    public ProductCategory(String name, String department, String description) {
-        super(name);
+    public ProductCategory(int id, String name, String department, String description) {
+        super(id, name, description);
         this.department = department;
         this.products = new ArrayList<>();
     }
@@ -34,7 +34,7 @@ public class ProductCategory extends BaseModel {
 
     public String toString() {
         return String.format(
-                "id: %1$d," +
+                "id: %1$d, " +
                         "name: %2$s, " +
                         "department: %3$s, " +
                         "description: %4$s",
