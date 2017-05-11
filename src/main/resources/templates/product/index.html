@@ -79,10 +79,15 @@
                 </div>
                 <div class="modal-body" th:each="prod : ${cart}">
                     <p th:text="${prod.getName()}">Shopping cart is empty</p>
+                    <button type="text"  data-product_id="1" class="qty"> + </button>
+                    <button type="text"  data-product_id="1" class="decrease"> - </button>
+
+                    <input class="quantity"  type="text" value="0"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
+                    <input class="sum" type="text" value="0"/>
                 </div>
             </div>
         </div>
