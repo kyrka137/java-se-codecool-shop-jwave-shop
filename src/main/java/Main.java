@@ -83,8 +83,8 @@ public class Main {
         productDataStore.add(new Product(1, "Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product(2, "Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product(3, "Amazon Fire HD 8", 89, "USD", "Amazons latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product(4, "Lenovo", 70, "USD", "Light and fast.", laptop, amazon));
-        productDataStore.add(new Product(5, "Sony Xperia Z3 D6653 White", 110, "USD", "Sonys one of favourite product.", phone, samsung));
+        productDataStore.add(new Product(4, "Lenovo", 70, "USD", "Light and fast.", laptop, lenovo));
+        productDataStore.add(new Product(5, "Sony Xperia Z3 D6653 White", 110, "USD", "Sonys one of favourite product.", phone, sony));
 
 
     }
