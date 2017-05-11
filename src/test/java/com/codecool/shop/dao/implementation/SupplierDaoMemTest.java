@@ -15,32 +15,34 @@ class SupplierDaoMemTest {
 
     @AfterEach
     public void clearExampleData() {
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        for (int i=0; i<supplierDataStore.getAll().size(); i++) {
-            supplierDataStore.remove(i);
+        SupplierDao supplierData = SupplierDaoMem.getInstance();
+        for (int i=0; i<supplierData.getAll().size(); i++) {
+            supplierData.remove(i);
         }
     }
 
     @Test
-    public void testIsProductCategoryDaoMemIsSingletone () {
-        SupplierDao supplierDataStore1 = SupplierDaoMem.getInstance();
-        SupplierDao supplierDataStore2 = SupplierDaoMem.getInstance();
-        assertEquals(supplierDataStore1.hashCode(),supplierDataStore2.hashCode());
-    }
-
-    @Test
-    public void testFindByIfIdZero() {
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        assertEquals(null,productCategoryDataStore.find(0));
+    public void testIsProductCategoryDaoMemIsSingleton () {
+        SupplierDao supplierData1 = SupplierDaoMem.getInstance();
+        SupplierDao supplierData2 = SupplierDaoMem.getInstance();
+        assertEquals(supplierData1.hashCode(),supplierData2.hashCode());
     }
 
     @Test
     public void testRemoveById() {
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        SupplierDao supplierData = SupplierDaoMem.getInstance();
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
-        supplierDataStore.remove(1);
-        assertEquals(null,supplierDataStore.find(1));
+        supplierData.add(amazon);
+        supplierData.remove(1);
+        assertEquals(null,supplierData.find(1));
     }
+
+    @Test
+    public void testFindByIfIdZero() {
+        ProductCategoryDao productCategoryData = ProductCategoryDaoMem.getInstance();
+        assertEquals(null,productCategoryData.find(0));
+    }
+
+
 
 }

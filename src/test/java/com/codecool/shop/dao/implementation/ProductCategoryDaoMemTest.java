@@ -27,7 +27,7 @@ class ProductCategoryDaoMemTest {
     }
 
     @Test
-    public void testIsProductCategoryDaoMemIsSingletone() {
+    public void testIsProductCategoryDaoMemIsSingleton() {
         ProductCategoryDao productCategoryDataStore1 = ProductCategoryDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore2 = ProductCategoryDaoMem.getInstance();
         Assertions.assertEquals(productCategoryDataStore1.hashCode(), productCategoryDataStore2.hashCode());
