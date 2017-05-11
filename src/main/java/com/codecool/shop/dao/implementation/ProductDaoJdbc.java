@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,30 +18,45 @@ import java.util.List;
 public class ProductDaoJdbc extends JdbcConnection implements ProductDao {
     @Override
     public void add(Product product) {
-        String query = "INSERT INTO products (id, name, defaultPrice, currencyString, description, productCategory, supplier) " +
-                        "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getDescription() + "', '" + product.getProductCategory() + "', '" + product.getSupplier() + "') " +
+        String query = "INSERT INTO products (id, name, defaultPrice, currencyString, description, cat_id, sup_id) " +
+                        "VALUES ('" + product.getId() + "', '" + product.getName() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency() + "', '" + product.getDescription() + "', '" + product.getProductCategory().getId() + "', '" + product.getSupplier().getId() + "') " +
                         "ON CONFLICT (name) DO UPDATE " +
-                        "SET id = '" + product.getId() + "', name = '" + product.getName() + "', defaultPrice = '" + product.getDefaultPrice() + "', currencyString = '" + product.getDefaultCurrency() + "', description = '" + product.getDescription() + "', productCategory = '" + product.getProductCategory() + "', supplier = '" + product.getSupplier() + "';";
+                        "SET id = '" + product.getId() + "', name = '" + product.getName() + "', defaultPrice = '" + product.getDefaultPrice() + "', currencyString = '" + product.getDefaultCurrency() + "', description = '" + product.getDescription() + "', cat_id = '" + product.getProductCategory().getId() + "', sup_id = '" + product.getSupplier().getId() + "';";
         executeQuery(query);
     }
 
     @Override
     public Product find(int id) {
-        String query = "SELECT * FROM products WHERE id ='" + id + "';";
+        String query = "SELECT * FROM products WHERE id ='" + id + "'" +
+                "INNER JOIN suppliers ON products.sup_id = suppliers.supplier_id" +
+                "INNER JOIN categories ON products.cat_id = categories.category_id;";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ){
+
             if (resultSet.next()){
+
+                ProductCategory prodCat = new ProductCategory(
+                        resultSet.getInt("category_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("department"),
+                        resultSet.getString("description"));
+
+                Supplier sup = new Supplier(
+                        resultSet.getInt("supplier_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"));
+
                 Product result = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getFloat("defaultPrice"),
                         resultSet.getString("currencyString"),
                         resultSet.getString("description"),
-                        null,
-                        null);
+                        prodCat,
+                        sup);
                 return result;
             } else {
                 return null;
@@ -55,12 +71,45 @@ public class ProductDaoJdbc extends JdbcConnection implements ProductDao {
 
     @Override
     public void remove(int id) {
-
+        String query = "DELETE FROM products WHERE id = '" + id +"';";
+        executeQuery(query);
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        String query = "SELECT * FROM products;";
+
+        List<Product> resultList = new ArrayList<>();
+        ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
+        SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
+
+        try (Connection connection = getConnection();
+             Statement statement =connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ){
+            while (resultSet.next()){
+                int prodCatId = resultSet.getInt("cat_id");
+                ProductCategory productCategory = productCategoryDaoJdbc.find(prodCatId);
+                int supId = resultSet.getInt("sup_id");
+                Supplier supplier = supplierDaoJdbc.find(supId);
+                Product actProduct = new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getFloat("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        productCategory,
+                        supplier
+                        );
+                resultList.add(actProduct);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
     }
 
     @Override

@@ -17,16 +17,16 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
     @Override
     public void add(ProductCategory category) {
         String query =
-                "INSERT INTO categories (id, name, department, description) " +
+                "INSERT INTO categories (category_id, name, department, description) " +
                 "VALUES ('" + category.getId() + "', '" + category.getName() + "', '" + category.getDepartment() + "', '" + category.getDescription() + "')" +
                 "ON CONFLICT (name) DO UPDATE " +
-                "SET id = '" + category.getId() + "', name = '" + category.getName() + "', department = '" + category.getDepartment() + "', description = '" + category.getDescription() + "';";
+                "SET category_id = '" + category.getId() + "', name = '" + category.getName() + "', department = '" + category.getDepartment() + "', description = '" + category.getDescription() + "';";
         executeQuery(query);
     }
 
     @Override
     public ProductCategory find(int id) {
-        String query = "SELECT * FROM categories WHERE id ='" + id + "';";
+        String query = "SELECT * FROM categories WHERE category_id ='" + id + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
@@ -34,7 +34,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
         ){
             if (resultSet.next()){
                 ProductCategory result = new ProductCategory(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("category_id"),
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description"));
@@ -52,7 +52,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
 
     @Override
     public ProductCategory find(String name) {
-        String query = "SELECT * FROM categories WHERE id ='" + name + "';";
+        String query = "SELECT * FROM categories WHERE category_id ='" + name + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
@@ -60,7 +60,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
         ){
             if (resultSet.next()){
                 ProductCategory result = new ProductCategory(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("category_id"),
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description"));
@@ -78,7 +78,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
 
     @Override
     public void remove(int id) {
-        String query = "DELETE FROM categories WHERE id = '" + id +"';";
+        String query = "DELETE FROM categories WHERE category_id = '" + id +"';";
         executeQuery(query);
     }
 
@@ -94,7 +94,7 @@ public class ProductCategoryDaoJdbc extends JdbcConnection implements ProductCat
         ){
             while (resultSet.next()){
                 ProductCategory actProductCategory = new ProductCategory(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("category_id"),
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description"));

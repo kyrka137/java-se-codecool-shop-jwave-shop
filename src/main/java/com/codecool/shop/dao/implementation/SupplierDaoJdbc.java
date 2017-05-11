@@ -17,16 +17,16 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
     @Override
     public void add(Supplier supplier) {
         String query =
-                "INSERT INTO suppliers (id, name, description) " +
+                "INSERT INTO suppliers (supplier_id, name, description) " +
                         "VALUES ('" + supplier.getId() + "', '" + supplier.getName() + "', '" + supplier.getDescription() + "')" +
                         "ON CONFLICT (name) DO UPDATE " +
-                        "SET id = '" + supplier.getId() + "', name = '" + supplier.getName() + "', description = '" + supplier.getDescription() + "';";
+                        "SET supplier_id = '" + supplier.getId() + "', name = '" + supplier.getName() + "', description = '" + supplier.getDescription() + "';";
         executeQuery(query);
     }
 
     @Override
     public Supplier find(int id) {
-        String query = "SELECT * FROM suppliers WHERE id ='" + id + "';";
+        String query = "SELECT * FROM suppliers WHERE supplier_id ='" + id + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
@@ -34,7 +34,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
         ){
             if (resultSet.next()){
                 Supplier result = new Supplier(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("supplier_id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"));
                 return result;
@@ -51,7 +51,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
 
     @Override
     public Supplier find(String name) {
-        String query = "SELECT * FROM suppliers WHERE id ='" + name + "';";
+        String query = "SELECT * FROM suppliers WHERE supplier_id ='" + name + "';";
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
@@ -59,7 +59,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
         ){
             if (resultSet.next()){
                 Supplier result = new Supplier(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("supplier_id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"));
                 return result;
@@ -76,7 +76,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
 
     @Override
     public void remove(int id) {
-        String query = "DELETE FROM suppliers WHERE id = '" + id +"';";
+        String query = "DELETE FROM suppliers WHERE supplier_id = '" + id +"';";
         executeQuery(query);
     }
 
@@ -92,7 +92,7 @@ public class SupplierDaoJdbc extends JdbcConnection implements SupplierDao {
         ){
             while (resultSet.next()){
                 Supplier actSupplier = new Supplier(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("supplier_id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"));
                 resultList.add(actSupplier);
