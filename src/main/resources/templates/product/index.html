@@ -78,11 +78,13 @@
                     </button>
                 </div>
                 <div class="modal-body" th:each="prod : ${cart}">
-                    <p th:text="${prod.getName()}">Shopping cart is empty</p>
+                    <spam th:text="${prod.getName()}" >Shopping cart is empty</spam>
+                    <spam th:text="${prod.getPrice()}" >Shopping cart is empty</spam>
+
                     <button type="text"  data-product_id="1" class="qty"> + </button>
                     <button type="text"  data-product_id="1" class="decrease"> - </button>
 
-                    <input class="quantity"  type="text" value="0"/>
+                    <input class="quantity"  type="text" value="1"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

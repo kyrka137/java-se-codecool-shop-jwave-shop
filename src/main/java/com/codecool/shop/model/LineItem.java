@@ -6,10 +6,10 @@ package com.codecool.shop.model;
 public class LineItem {
     private Product product;
     private int quantity;
-    private float price;
+    private String price;
 
 
-    public LineItem(Product product, int quantity, float price) {
+    public LineItem(Product product, int quantity, String price) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;
@@ -28,11 +28,11 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public float getPrice() {
+    public String  getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

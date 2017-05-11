@@ -61,7 +61,7 @@ public class ProductController {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         String id = req.params(":id");
         Product newProduct = productDataStore.find(Integer.parseInt(id));
-        float price = Float.valueOf(newProduct.getPrice());
+        String price = newProduct.getPrice();
         LineItem newLineItem = new LineItem(newProduct, 1, price);
 
         ShopCart cart = ShopCart.getInstance();
