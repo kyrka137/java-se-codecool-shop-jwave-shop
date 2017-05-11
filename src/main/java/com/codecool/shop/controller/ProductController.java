@@ -1,14 +1,8 @@
 package com.codecool.shop.controller;
-import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.*;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.ShopCart;
-import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.SupplierDaoJdbc;
+import com.codecool.shop.model.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -63,7 +57,7 @@ public class ProductController {
 
 
     public static ModelAndView renderShoppingCarts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDaoJdbc productDataStore = new ProductDaoJdbc();
         String id = req.params(":id");
         Product newProduct = productDataStore.find(Integer.parseInt(id));
         String price = newProduct.getPrice();

@@ -27,9 +27,11 @@ public class ProductDaoJdbc extends JdbcConnection implements ProductDao {
 
     @Override
     public Product find(int id) {
-        String query = "SELECT * FROM products WHERE id ='" + id + "'" +
-                "INNER JOIN suppliers ON products.sup_id = suppliers.supplier_id" +
-                "INNER JOIN categories ON products.cat_id = categories.category_id;";
+        String query = "SELECT * FROM products " +
+                "INNER JOIN suppliers ON products.sup_id = suppliers.supplier_id " +
+                "INNER JOIN categories ON products.cat_id = categories.category_id "+
+                "WHERE id =" + id + ";";
+
 
         try (Connection connection = getConnection();
              Statement statement =connection.createStatement();
