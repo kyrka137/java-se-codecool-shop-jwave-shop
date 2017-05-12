@@ -23,11 +23,11 @@ class ProductDaoMemTest {
         ProductDao productDao = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDao = SupplierDaoMem.getInstance();
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer.");
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        ProductCategory tablet = new ProductCategory(1, "Tablet", "Hardware", "A tablet computer.");
+        Supplier amazon = new Supplier(1,"Amazon", "Digital content and services");
         productCategoryDao.add(tablet);
         supplierDao.add(amazon);
-        productDao.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+        productDao.add(new Product(1,"Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
     }
 
     @AfterEach
