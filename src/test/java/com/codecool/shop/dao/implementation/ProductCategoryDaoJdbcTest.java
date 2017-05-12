@@ -1,6 +1,6 @@
-package com.codecool.shop.dao;
+package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
+import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
 import jdk.nashorn.internal.objects.annotations.Optimistic;
 import org.junit.jupiter.api.Test;

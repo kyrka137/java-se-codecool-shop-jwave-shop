@@ -1,6 +1,6 @@
-package com.codecool.shop.dao;
+package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.implementation.ProductDaoJdbc;
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -40,14 +40,14 @@ public class ProductDaoJdbcTest {
     public void getBySupplier() {
         ProductDao productDao = new ProductDaoJdbc();
         Supplier supplier = new Supplier(137, "", "");
-        assertNull(productDao.getBy(supplier));
+        assertTrue(productDao.getBy(supplier).isEmpty());
     }
 
     @Test
     public void getByProductCategory() {
         ProductDao productDao = new ProductDaoJdbc();
         ProductCategory productcategory = new ProductCategory(137, "", "", "");
-        assertNull(productDao.getBy(productcategory));
+        assertTrue(productDao.getBy(productcategory).isEmpty());
     }
 
     @Test
