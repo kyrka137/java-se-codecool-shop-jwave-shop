@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+
 /**
  * Created by gabor on 2017.05.10..
  */
