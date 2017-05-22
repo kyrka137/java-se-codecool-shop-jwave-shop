@@ -7,6 +7,9 @@ import com.codecool.shop.model.ProductCategory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Product category dao mem.
+ */
 public class ProductCategoryDaoMem implements ProductCategoryDao {
 
     private List<ProductCategory> DATA = new ArrayList<>();
@@ -17,6 +20,11 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     private ProductCategoryDaoMem() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ProductCategoryDaoMem getInstance() {
         if (instance == null) {
             instance = new ProductCategoryDaoMem();

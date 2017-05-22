@@ -8,18 +8,32 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Products.
+ */
 public class Products {
 
     private final List<Pro> products = new ArrayList<Pro>();
 
+    /**
+     * Instantiates a new Products.
+     */
     public Products () {
         this.initStoreItems();
     }
 
+    /**
+     * Gets products.
+     *
+     * @return the products
+     */
     public List<Pro> getProducts() {
         return products;
     }
 
+    /**
+     * Init store items.
+     */
     public void initStoreItems() {
         String [] productNames = {"Amazon Fire", "Lenovo IdeaPad Miix 700", "Amazon Fire HD 8"};
         Double [] productPrice = {49.9d, 479.0d, 89.0d};

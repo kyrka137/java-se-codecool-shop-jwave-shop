@@ -7,10 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Cart.
+ */
 public class Cart {
 
+    /**
+     * The Cart items.
+     */
     List<Pro> cartItems = new ArrayList<Pro>();
 
+    /**
+     * Add product to cart by pid.
+     *
+     * @param pid the pid
+     */
     public void addProductToCartByPID(int pid) {
         Pro pro = getProductByProductID(pid);
         addToCart(pro);
@@ -32,11 +43,19 @@ public class Cart {
         cartItems.add(pro);
     }
 
+    /**
+     * Remove product by pid.
+     *
+     * @param pid the pid
+     */
     public void removeProductByPID(int pid) {
         Pro prod = getProductByProductID(pid);
         cartItems.remove(prod);
     }
 
+    /**
+     * Print cart items.
+     */
     void printCartItems() {
         for (Pro prod: cartItems) {
             System.out.println(prod.getName());

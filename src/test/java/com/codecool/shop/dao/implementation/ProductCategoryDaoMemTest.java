@@ -6,18 +6,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-
-
-
-
-
-
-
-
+/**
+ * The type Product category dao mem test.
+ */
 class ProductCategoryDaoMemTest {
+    /**
+     * Instantiates a new Product category dao mem test.
+     */
     ProductCategoryDaoMemTest() {
     }
 
+    /**
+     * Test same category name cannot add.
+     */
     @Test
     public void testSameCategoryNameCannotAdd() {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -29,6 +30,9 @@ class ProductCategoryDaoMemTest {
         Assertions.assertEquals(1, size);
     }
 
+    /**
+     * Test is product category dao mem is singleton.
+     */
     @Test
     public void testIsProductCategoryDaoMemIsSingleton() {
         ProductCategoryDao productCategoryDataStore1 = ProductCategoryDaoMem.getInstance();
@@ -36,6 +40,9 @@ class ProductCategoryDaoMemTest {
         Assertions.assertEquals(productCategoryDataStore1.hashCode(), productCategoryDataStore2.hashCode());
     }
 
+    /**
+     * Test find by id if non existing id.
+     */
     @Test
     public void testFindByIdIfNonExistingId() {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -45,6 +52,9 @@ class ProductCategoryDaoMemTest {
     private void assertEquals(Object o, ProductCategory productCategory) {
     }
 
+    /**
+     * Test find by if id zero.
+     */
     @Test
     public void testFindByIfIdZero() {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -52,7 +62,9 @@ class ProductCategoryDaoMemTest {
     }
 
 
-
+    /**
+     * Test remove by non existing id.
+     */
     @Test
     public void testRemoveByNonExistingId() {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -62,6 +74,9 @@ class ProductCategoryDaoMemTest {
 
     }
 
+    /**
+     * Test remove by id.
+     */
     @Test
     public void testRemoveById() {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();

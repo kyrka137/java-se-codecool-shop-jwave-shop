@@ -18,8 +18,16 @@ import java.util.Map;
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
+/**
+ * The type Main.
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         // default server settings
@@ -99,6 +107,9 @@ public class Main {
         new UI();
     }
 
+    /**
+     * Populate data.
+     */
     public static void populateData() {
 
         ProductDaoJdbc productDataStore = new ProductDaoJdbc();

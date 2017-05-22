@@ -6,6 +6,9 @@ import com.codecool.shop.model.Supplier;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Supplier dao mem.
+ */
 public class SupplierDaoMem implements SupplierDao {
 
     private List<Supplier> DATA = new ArrayList<>();
@@ -16,6 +19,11 @@ public class SupplierDaoMem implements SupplierDao {
     private SupplierDaoMem() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static SupplierDaoMem getInstance() {
         if (instance == null) {
             instance = new SupplierDaoMem();

@@ -2,6 +2,9 @@ package com.codecool.shop.model;
 
 import java.util.Objects;
 
+/**
+ * The type Pro.
+ */
 public class Pro {
 
     private Integer pid;
@@ -9,16 +12,30 @@ public class Pro {
     private Double price;
     private Integer stock;
 
+    /**
+     * Instantiates a new Pro.
+     */
     public Pro() {
     }
 
+    /**
+     * Instantiates a new Pro.
+     *
+     * @param pid   the pid
+     * @param name  the name
+     * @param price the price
+     * @param stock the stock
+     */
     public Pro(Integer pid, String name, Double price, Integer stock) {
         this.pid = pid;
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
+
     /**
+     * Gets name.
+     *
      * @return the name
      */
     public String getName() {
@@ -26,6 +43,8 @@ public class Pro {
     }
 
     /**
+     * Sets name.
+     *
      * @param name the name to set
      */
     public void setName(String name) {
@@ -33,6 +52,8 @@ public class Pro {
     }
 
     /**
+     * Gets price.
+     *
      * @return the price
      */
     public Double getPrice() {
@@ -40,6 +61,8 @@ public class Pro {
     }
 
     /**
+     * Sets price.
+     *
      * @param price the price to set
      */
     public void setPrice(Double price) {
@@ -47,6 +70,8 @@ public class Pro {
     }
 
     /**
+     * Gets stock.
+     *
      * @return the stock
      */
     public Integer getStock() {
@@ -54,6 +79,8 @@ public class Pro {
     }
 
     /**
+     * Sets stock.
+     *
      * @param stock the stock to set
      */
     public void setStock(Integer stock) {
@@ -61,6 +88,8 @@ public class Pro {
     }
 
     /**
+     * Gets pid.
+     *
      * @return the pid
      */
     public Integer getPid() {
@@ -105,6 +134,8 @@ public class Pro {
     }
 
     /**
+     * Sets pid.
+     *
      * @param pid the pid to set
      */
     public void setPid(Integer pid) {

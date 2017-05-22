@@ -7,27 +7,45 @@ import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * The type Ui.
+ */
 public class UI {
 
+    /**
+     * The Cart.
+     */
     Cart cart = new Cart();
     private int ch = 0;
 
+    /**
+     * Instantiates a new Ui.
+     */
     public UI() {
         menu();
     }
 
+    /**
+     * Start screen.
+     */
     public void startScreen () {
         System.out.println("1. Display Store Products");
         System.out.println("2. Display Cart");
         System.out.println("0. Exit");
     }
 
+    /**
+     * Store products menu.
+     */
     public void storeProductsMenu() {
         System.out.println("1. Add to Cart");
         System.out.println("2. Remove From Cart");
         System.out.println("0. Exit");
     }
 
+    /**
+     * Menu.
+     */
     public void menu () {
         do {
             startScreen();

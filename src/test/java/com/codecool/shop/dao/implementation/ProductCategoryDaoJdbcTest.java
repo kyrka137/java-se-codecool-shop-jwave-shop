@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class ProductCategoryDaoJdbcTest {
 
+    /**
+     * Gets all.
+     */
     @Test
     public void getALL() {
         ProductCategoryDao productCategoryDao = new ProductCategoryDaoJdbc();
@@ -20,6 +23,9 @@ public class ProductCategoryDaoJdbcTest {
     }
 
 
+    /**
+     * Add.
+     */
     @Test
     public void add() {
         ProductCategoryDao productCategoryDao = new ProductCategoryDaoJdbc();
@@ -28,6 +34,9 @@ public class ProductCategoryDaoJdbcTest {
         assertNotNull(productCategoryDao.find(137));
     }
 
+    /**
+     * Find string.
+     */
     @Test
     public void find_string() {
         ProductCategoryDao productCategoryDao = new ProductCategoryDaoJdbc();
@@ -37,6 +46,9 @@ public class ProductCategoryDaoJdbcTest {
     }
 
 
+    /**
+     * Find int.
+     */
     @Optimistic
     @Test
     public void find_int() {
@@ -46,6 +58,9 @@ public class ProductCategoryDaoJdbcTest {
         assertEquals("productcategoryname", productCategoryDao.find(137).getName());
     }
 
+    /**
+     * Remove.
+     */
     @Test
     public void remove() {
         ProductCategoryDao productCategoryDao = new ProductCategoryDaoJdbc();

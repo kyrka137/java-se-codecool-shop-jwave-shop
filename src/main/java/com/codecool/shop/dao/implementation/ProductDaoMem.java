@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Product dao mem.
+ */
 public class ProductDaoMem implements ProductDao {
 
     private List<Product> DATA = new ArrayList<>();
@@ -20,6 +23,11 @@ public class ProductDaoMem implements ProductDao {
     private ProductDaoMem() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ProductDaoMem getInstance() {
         if (instance == null) {
             instance = new ProductDaoMem();

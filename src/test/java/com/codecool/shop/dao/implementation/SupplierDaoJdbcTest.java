@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 class SupplierDaoJdbcTest {
 
+    /**
+     * Gets all.
+     */
     @Test
     public void getALL() {
         SupplierDao supplierDao = new SupplierDaoJdbc();
@@ -20,6 +23,9 @@ class SupplierDaoJdbcTest {
     }
 
 
+    /**
+     * Add.
+     */
     @Test
     public void add() {
         SupplierDao supplierDao = new SupplierDaoJdbc();
@@ -28,6 +34,9 @@ class SupplierDaoJdbcTest {
         assertNotNull(supplierDao.find(137));
     }
 
+    /**
+     * Find string.
+     */
     @Test
     public void find_string() {
         SupplierDao supplierDao = new SupplierDaoJdbc();
@@ -35,6 +44,9 @@ class SupplierDaoJdbcTest {
     }
 
 
+    /**
+     * Find int.
+     */
     @Optimistic
     @Test
     public void find_int() {
@@ -42,6 +54,9 @@ class SupplierDaoJdbcTest {
         assertEquals(1, supplierDao.find(1).getId());
     }
 
+    /**
+     * Remove.
+     */
     @Test
     public void remove() {
         SupplierDao supplierDao = new SupplierDaoJdbc();

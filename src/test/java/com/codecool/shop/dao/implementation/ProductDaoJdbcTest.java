@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ProductDaoJdbcTest {
 
+    /**
+     * Add.
+     */
     @Test
     public void add() {
         ProductCategory productcategory = new ProductCategory(137, "", "", "");
@@ -24,18 +27,27 @@ public class ProductDaoJdbcTest {
         assertNotNull(productDao.find(137));
     }
 
+    /**
+     * Find.
+     */
     @Test
     public void find() {
         ProductDao productDao = new ProductDaoJdbc();
         assertEquals(1, productDao.find(1));
     }
 
+    /**
+     * Gets all.
+     */
     @Test
     public void getAll() {
         ProductDao productDao = new ProductDaoJdbc();
         assertEquals(null, productDao.find(-7));
     }
 
+    /**
+     * Gets by supplier.
+     */
     @Test
     public void getBySupplier() {
         ProductDao productDao = new ProductDaoJdbc();
@@ -43,6 +55,9 @@ public class ProductDaoJdbcTest {
         assertTrue(productDao.getBy(supplier).isEmpty());
     }
 
+    /**
+     * Gets by product category.
+     */
     @Test
     public void getByProductCategory() {
         ProductDao productDao = new ProductDaoJdbc();
@@ -50,6 +65,9 @@ public class ProductDaoJdbcTest {
         assertTrue(productDao.getBy(productcategory).isEmpty());
     }
 
+    /**
+     * Remove.
+     */
     @Test
     public void remove() {
         ProductDao productDao = new ProductDaoJdbc();

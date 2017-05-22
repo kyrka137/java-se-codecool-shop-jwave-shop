@@ -12,9 +12,17 @@ public class ShopCart {
     private String status;
     private List<LineItem> shoppingCart;
     private static ShopCart instance;
+    /**
+     * The Total price.
+     */
     float totalPrice = 0;
 
 
+    /**
+     * Add shopping cart.
+     *
+     * @param product the product
+     */
     public void addShoppingCart(Product product) {
         boolean notFound = true;
         for(LineItem lineItem  : shoppingCart) {
@@ -29,10 +37,21 @@ public class ShopCart {
         }
     }
 
+    /**
+     * Gets shopping cart.
+     *
+     * @param id the id
+     * @return the shopping cart
+     */
     public LineItem getShoppingCart(int id) {
         return shoppingCart.get(id);
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ShopCart getInstance() {
         if (instance == null) {
             instance = new ShopCart();
@@ -40,15 +59,28 @@ public class ShopCart {
         return instance;
     }
 
+    /**
+     * Gets all carts.
+     *
+     * @return the all carts
+     */
     public List<LineItem> getAllCarts() {
         return shoppingCart;
     }
 
+    /**
+     * Instantiates a new Shop cart.
+     */
     public ShopCart() {
         shoppingCart = new ArrayList<>();
 
     }
 
+    /**
+     * Gets total price.
+     *
+     * @return the total price
+     */
     public float getTotalPrice() {
         for (LineItem lineItem: shoppingCart) {
             this.totalPrice += lineItem.getPrice();
@@ -56,18 +88,38 @@ public class ShopCart {
         return totalPrice;
     }
 
+    /**
+     * Gets .
+     *
+     * @return the
+     */
     public int getid() {
         return id;
     }
 
+    /**
+     * Sets .
+     *
+     * @param id the id
+     */
     public void setid(int id) {
         this.id = id;
     }
 
+    /**
+     * Sets status.
+     *
+     * @param status the status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * Gets status.
+     *
+     * @return the status
+     */
     public String getStatus() {
         return status;
     }

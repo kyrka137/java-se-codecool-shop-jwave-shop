@@ -18,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ProductDaoMemTest {
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         ProductDao productDao = ProductDaoMem.getInstance();
@@ -30,6 +33,9 @@ class ProductDaoMemTest {
         productDao.add(new Product(1,"Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
     }
 
+    /**
+     * Tear down.
+     */
     @AfterEach
     void tearDown() {
         ProductDao productDao = ProductDaoMem.getInstance();
@@ -41,6 +47,9 @@ class ProductDaoMemTest {
 
     }
 
+    /**
+     * Test get instance.
+     */
     @Test
     void testGetInstance() {
         ProductDao product1 = ProductDaoMem.getInstance();
@@ -48,12 +57,18 @@ class ProductDaoMemTest {
         assertEquals(product1.hashCode(),product2.hashCode());
     }
 
+    /**
+     * Gets all.
+     */
     @Test
     void getAll() {
         ProductDao productDao = ProductDaoMem.getInstance();
         assertEquals(1,productDao.getAll().size());
     }
 
+    /**
+     * Test add.
+     */
     @Test
     void testAdd() {
         ProductDao productDao = ProductDaoMem.getInstance();
@@ -61,6 +76,9 @@ class ProductDaoMemTest {
         productDao.remove(1);
     }
 
+    /**
+     * Test remove.
+     */
     @Test
     void testRemove() {
         ProductDao productDao = ProductDaoMem.getInstance();
@@ -68,6 +86,9 @@ class ProductDaoMemTest {
         assertEquals(0,productDao.getAll().size());
     }
 
+    /**
+     * Test find.
+     */
     @Test
     void testFind() {
         ProductDao productDao = ProductDaoMem.getInstance();

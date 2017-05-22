@@ -11,8 +11,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Product controller.
+ */
 public class ProductController {
 
+    /**
+     * Render products model and view.
+     *
+     * @param req the req
+     * @param res the res
+     * @return the model and view
+     */
     public static ModelAndView renderProducts(Request req, Response res) {
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -56,6 +66,13 @@ public class ProductController {
     }
 
 
+    /**
+     * Render shopping carts model and view.
+     *
+     * @param req the req
+     * @param res the res
+     * @return the model and view
+     */
     public static ModelAndView renderShoppingCarts(Request req, Response res) {
         ProductDaoJdbc productDataStore = new ProductDaoJdbc();
         String id = req.params(":id");
